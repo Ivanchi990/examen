@@ -1,5 +1,6 @@
 package aad.ex.ivan_fernandez;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -164,6 +165,31 @@ public class Funciones
 		
 		Connection conexion = ConexionSingleton.getConnection();
 		
+		try
+		{
+			conexion.setAutoCommit(true);
+			
+			PreparedStatement ps = conexion.prepareStatement(update);
+			
+			ps.setLong(1, s.getIdSala());
+			ps.setLong(2, s.getIdPelicula());
+			ps.setString(3, s.getHora());
+			ps.setString(4, s.getIdioma());
+			ps.setLong(5, s.getIdSesion());
+			
+			int rows = ps.executeUpdate();
+			
+			System.out.println("Se han afectado " + rows + "filas.");
+			
+			if(rows > 0)
+			{
+				return true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.err.println(e.getMessage());
+		}
 		
 		return false;
 	}
@@ -171,6 +197,6 @@ public class Funciones
 	
 	public void exportarPeliculas(String nombreFichero)
 	{
-		
+		File fichero = new File(nombreFichero);
 	}
 }
