@@ -225,3 +225,29 @@ public class Funciones
 		}
 	}
 }
+
+//		Funciones funciones = new Funciones();
+//		
+//		ArrayList<Sesion> sesiones = new ArrayList<>();
+//		
+//		sesiones.add(new Sesion(1, 11, "2022-12-02 14:30:00", "Rumano"));
+//		sesiones.add(new Sesion(2, 11, "2022-12-02 15:30:00", "Pitinglish"));
+//		sesiones.add(new Sesion(3, 11, "2022-12-02 16:30:00", "Sevillano"));
+//		sesiones.add(new Sesion(2, 11, "2022-12-02 17:30:00", "Hungaro"));
+//		sesiones.add(new Sesion(1, 11, "2022-12-02 18:30:00", "Griego"));
+//		
+		
+//		funciones.anadirSesiones(sesiones);
+		
+		
+//		funciones.eliminarPelicula(11);
+		
+//		System.out.println(funciones.obtenerSala(2));
+
+//		System.out.println(funciones.obtenerPelicula(2));
+		
+//		Sesion s = new Sesion(1, 2, 1, "2022-12-02 10:00:00", "Rumanosky");
+		
+//		System.out.println(funciones.modificarSesion(s));
+		
+//		funciones.exportarPeliculasACsv("/home/alumno/peliculas.txt");
