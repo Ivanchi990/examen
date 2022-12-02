@@ -1,6 +1,9 @@
 package aad.ex.ivan_fernandez;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +22,7 @@ public class Funciones
 	
 	public void anadirSesiones(ArrayList<Sesion> sesiones)
 	{
-		String insert = "INSERT INTO Sesiones VALUES(?, ?, ?, ?);";
+		String insert = "INSERT INTO Sesiones(idSala, idPelicula, hora, idioma) VALUES(?, ?, ?, ?);";
 		
 		Connection conexion = ConexionSingleton.getConnection();
 		
@@ -75,13 +78,12 @@ public class Funciones
 			ps = conexion.prepareStatement(deleteSesion);
 			ps.setLong(1, idPelicula);
 			
-			if(ps.execute())
-			{
-				ps = conexion.prepareStatement(deletePelicula);
-				ps.setLong(1, idPelicula);
-				
-				ps.execute();
-			}
+			ps.execute();
+			
+			ps = conexion.prepareStatement(deletePelicula);
+			ps.setLong(1, idPelicula);
+			
+			ps.execute();
 			
 			conexion.commit();
 		} 
@@ -179,8 +181,6 @@ public class Funciones
 			
 			int rows = ps.executeUpdate();
 			
-			System.out.println("Se han afectado " + rows + "filas.");
-			
 			if(rows > 0)
 			{
 				return true;
@@ -196,7 +196,32 @@ public class Funciones
 	
 	
 	public void exportarPeliculas(String nombreFichero)
-	{
-		File fichero = new File(nombreFichero);
+	{	
+		String select = "SELECT * FROM Peliculas;";
+		
+		Connection conexion = ConexionSingleton.getConnection();
+		
+		try 
+		{
+			conexion.setAutoCommit(true);
+			
+			PreparedStatement ps = conexion.prepareStatement(select);
+			ResultSet rs = ps.executeQuery();
+			
+			BufferedWriter bw = new BufferedWriter(new FileWriter(new File(nombreFichero)));
+			
+			while(rs.next())
+			{
+				Pelicula peli = new Pelicula(rs.getLong(1), rs.getString(2), rs.getString(3));
+				
+				bw.write(peli.toCSV());
+			}
+			
+			bw.close();
+		} 
+			catch (IOException | SQLException e) 
+		{
+			System.err.println(e.getMessage());
+		}
 	}
 }
