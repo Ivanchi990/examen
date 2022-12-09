@@ -25,14 +25,14 @@ class MainActivity : AppCompatActivity()
 
     fun guardarHora()
     {
-        if(binding!!.tvIntroduceHora.text.equals(""))
+        if(binding!!.tvTiempo.text.equals(""))
         {
             Toast.makeText(this, "Necesito una hora", Toast.LENGTH_SHORT).show()
         }
         else
         {
             intent = Intent(this, MenuActivity::class.java).apply {
-                putExtra("hora", binding!!.tvIntroduceHora.text.toString())
+                putExtra("hora", binding!!.tvTiempo.text.toString())
             }
 
             startActivity(intent)

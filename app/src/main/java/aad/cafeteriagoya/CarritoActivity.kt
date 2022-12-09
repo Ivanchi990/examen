@@ -3,6 +3,7 @@ package aad.cafeteriagoya
 import aad.cafeteriagoya.databinding.ActivityCarritoBinding
 import aad.cafeteriagoya.databinding.ActivityMenuBinding
 import aad.cafeteriagoya.sqlite.MiBDOpenHelper
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
@@ -20,6 +21,10 @@ class CarritoActivity : AppCompatActivity()
 
         mostrarCarrito()
 
+        binding?.btInicio?.setOnClickListener{
+            volverCasa()
+        }
+
         setContentView(binding!!.root)
     }
 
@@ -36,7 +41,19 @@ class CarritoActivity : AppCompatActivity()
 
         while(!cursor.isAfterLast)
         {
+            con = con + "\n" + cursor.getString(2) + "-" + cursor.getString(3) + "€"
 
+            cursor.moveToNext()
         }
+
+        binding?.textView2?.text = "La hora del pedido es: " + hora + "\n" + con
+    }
+
+
+    fun volverCasa()
+    {
+        intent = Intent(this, MainActivity::class.java)
+
+        startActivity(intent)
     }
 }

@@ -95,7 +95,7 @@ class MenuActivity : AppCompatActivity()
 
     fun dameID(pos: Int)
     {
-        base?.andirProducto(listaProductos[pos])
+        base?.andirProducto(listaProductos[pos-1])
     }
 
 

@@ -20,6 +20,4 @@ companion object {
         Producto(12,"medio bocadillo de atún y tomate", 2.90, "bocadillo")
     )
 }
-
-
 }
