@@ -2,6 +2,7 @@ package aad.cafeteriagoya.adapter
 
 import aad.cafeteriagoya.R
 import aad.cafeteriagoya.entidades.Producto
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
 import android.widget.Button
@@ -21,9 +22,9 @@ class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     fun render(producto: Producto,
                onClickListener: (Int) -> Unit)
     {
-        val ruta = "R.id.${producto.categoria}"
+        val ruta = "R.drawable.${producto.categoria}"
 
-        val uri = Uri.fromFile(ruta)
+        val uri = Uri.parse(ruta)
 
         Picasso.with(imagenView.context).load(uri).fit().centerCrop().into(imagenView)
 

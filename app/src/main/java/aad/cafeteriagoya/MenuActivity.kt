@@ -84,6 +84,8 @@ class MenuActivity : AppCompatActivity()
         cat = binding?.spinner?.selectedItem.toString()
 
         adapterProductos.notifyDataSetChanged()
+
+        iniciarRecicler()
     }
 
 
