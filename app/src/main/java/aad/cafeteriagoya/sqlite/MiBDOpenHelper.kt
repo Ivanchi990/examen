@@ -3,6 +3,7 @@ package aad.cafeteriagoya.sqlite
 import aad.cafeteriagoya.entidades.Producto
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
@@ -55,5 +56,11 @@ class MiBDOpenHelper(contex: Context, factory: SQLiteDatabase.CursorFactory?) :
             db.close()
     }
 
-    fun obte
+    fun obtenerCarrito(cat:String): Cursor
+    {
+        val db= this.readableDatabase
+        var cursor = db.rawQuery("SELECT * FROM ${MiBDOpenHelper.T_PRODUCTOS} WHERE ${MiBDOpenHelper.PRODUCTO_CATEGORIA} = '$cat'", null)
+
+        return cursor
+    }
 }
