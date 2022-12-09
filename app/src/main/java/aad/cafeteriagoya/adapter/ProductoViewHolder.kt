@@ -22,13 +22,23 @@ class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     fun render(producto: Producto,
                onClickListener: (Int) -> Unit)
     {
-        val ruta = "R.drawable.${producto.categoria}"
+        if(producto.categoria.equals("bocadillo"))
+        {
+            imagenView.setImageResource(R.drawable.bocadillo)
+        }
+        else if(producto.categoria.equals("cafe"))
+        {
+            imagenView.setImageResource(R.drawable.cafe)
+        }
+        else if(producto.categoria.equals("pincho"))
+        {
+            imagenView.setImageResource(R.drawable.pincho)
+        }
+        else if(producto.categoria.equals("refresco"))
+        {
+            imagenView.setImageResource(R.drawable.refresco)
+        }
 
-        val uri = Uri.parse(ruta)
-
-        Picasso.with(imagenView.context).load(uri).fit().centerCrop().into(imagenView)
-
-        imagenView.setImageURI(uri)
         textViewProducto.text = producto.nombre
         textViewPrecio.text = producto.precio.toString() + "€"
 
