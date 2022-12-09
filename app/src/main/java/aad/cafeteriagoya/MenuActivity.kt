@@ -19,7 +19,7 @@ class MenuActivity : AppCompatActivity()
     var binding:ActivityMenuBinding? = null
     var base: MiBDOpenHelper? = null
     var cat = "Todas"
-    private lateinit var adapterProductos: MenuAdapter
+    private lateinit var adapterProductos: MenuAdaptador
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -50,32 +50,33 @@ class MenuActivity : AppCompatActivity()
 
     fun iniciarRecicler()
     {
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val recyclerView = binding?.recyclerView
+        recyclerView?.layoutManager = LinearLayoutManager(this)
 
         var productos:ArrayList<Producto> = ArrayList()
 
-        if(!cat.equals("Todaas"))
+        if(cat.equals("Todas"))
         {
-            for (producto in listaProductos) {
+            productos = ArrayList(listaProductos)
+        }
+        else
+        {
+            for (producto in listaProductos)
+            {
                 if (producto.categoria.equals(cat))
                 {
                     productos.add(producto)
                 }
             }
         }
-        else
-        {
-            productos = listaProductos as ArrayList<Producto>
-        }
 
-        adapterProductos = MenuAdapter(
+        adapterProductos = MenuAdaptador(
             onClickListener = { pos -> dameID(pos) }
         )
 
         adapterProductos.MenuAdaptador(this,  productos)
 
-        recyclerView.adapter = adapterProductos
+        recyclerView?.adapter = adapterProductos
     }
 
     fun filtrar()

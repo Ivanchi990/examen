@@ -21,7 +21,7 @@ class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     fun render(producto: Producto,
                onClickListener: (Int) -> Unit)
     {
-        val ruta = File("@drawable/${producto.categoria}")
+        val ruta = "R.id.${producto.categoria}"
 
         val uri = Uri.fromFile(ruta)
 
