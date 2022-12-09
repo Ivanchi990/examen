@@ -2,20 +2,18 @@ package aad.cafeteriagoya
 
 import aad.cafeteriagoya.DataProvider.Companion.listaProductos
 import aad.cafeteriagoya.adapter.MenuAdaptador
-import aad.cafeteriagoya.databinding.ActivityMainBinding
 import aad.cafeteriagoya.databinding.ActivityMenuBinding
 import aad.cafeteriagoya.entidades.Producto
 import aad.cafeteriagoya.sqlite.MiBDOpenHelper
-import android.media.midi.MidiDevice.MidiConnection
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 class MenuActivity : AppCompatActivity()
 {
+    private lateinit var hora:String
     var binding:ActivityMenuBinding? = null
     var base: MiBDOpenHelper? = null
     var cat = "Todas"
@@ -32,8 +30,14 @@ class MenuActivity : AppCompatActivity()
 
         iniciarRecicler()
 
+        hora = intent.getStringExtra("hora").toString()
+
         binding?.btFiltrar?.setOnClickListener{
             filtrar()
+        }
+
+        binding?.btCarrito?.setOnClickListener{
+            mostrarCarrito()
         }
 
         setContentView(binding!!.root)
@@ -92,5 +96,15 @@ class MenuActivity : AppCompatActivity()
     fun dameID(pos: Int)
     {
         base?.andirProducto(listaProductos[pos])
+    }
+
+
+    fun mostrarCarrito()
+    {
+        intent = Intent(this, CarritoActivity::class.java).apply{
+            putExtra("hora", hora)
+        }
+
+        startActivity(intent)
     }
 }

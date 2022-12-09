@@ -56,10 +56,10 @@ class MiBDOpenHelper(contex: Context, factory: SQLiteDatabase.CursorFactory?) :
             db.close()
     }
 
-    fun obtenerCarrito(cat:String): Cursor
+    fun obtenerCarrito(): Cursor
     {
         val db= this.readableDatabase
-        var cursor = db.rawQuery("SELECT * FROM ${MiBDOpenHelper.T_PRODUCTOS} WHERE ${MiBDOpenHelper.PRODUCTO_CATEGORIA} = '$cat'", null)
+        var cursor = db.rawQuery("SELECT * FROM ${MiBDOpenHelper.T_PRODUCTOS}", null)
 
         return cursor
     }
